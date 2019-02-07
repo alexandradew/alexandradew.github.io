@@ -8,6 +8,12 @@
 			color:#FFF;
 		}
 		canvas{
+			position: absolute;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			margin:auto;
 			border:2px solid;
 			background: #34495e;
 		}
@@ -22,8 +28,7 @@
 </head>
 <body>
 <canvas width="600" height="800"></canvas>
-<div id="info"></div>
-<div id="meteor"></div>
+
 
 <script>
 	// variaveis do jogo
@@ -36,14 +41,23 @@
 	var LEFT = 37, RIGHT = 39
 	var background = new Image();
 	background.src = "bg.jpg";
+	var nave = new Image();
+	nave.src = "ship.png";
+	var meteoro = new Image();
+	meteoro.src = "meteor.png";
+	var tiro = new Image();
+	tiro.src = "tiro.png";
+	var exp = new Image();
+	exp.src = "explosion.png";
+	var gameOver = new Image();
+	gameOver.src = "gameover.jpg";
 	var cnv = document.querySelector('canvas');
 	var ctx = cnv.getContext('2d');
-
 	var ship = {
 		x:270,
-		y:700,
-		w:50,
-		h:50,
+		y:670,
+		w:80,
+		h:100,
 	}
 
 	bullets = [];
@@ -51,20 +65,20 @@
 	{
 		x:Math.floor(Math.random() * 520) + 1,
 		y:-40,
-		w:30,
-		h:30
+		w:40,
+		h:60
 	},
 	{
 		x:Math.floor(Math.random() * 520) + 1,
 		y:-40,
-		w:30,
-		h:30
+		w:40,
+		h:60
 	},
 	{
 		x:Math.floor(Math.random() * 520) + 1,
 		y:-40,
-		w:30,
-		h:30
+		w:40,
+		h:60
 	}
 	];
 
@@ -88,13 +102,29 @@
 		}
 
 		if (key === 65){
-			bullets.push({
-				x:ship.x+25,
-				y:ship.y,
-				w:5,
-				h:5
-			})
+			side = Math.floor(Math.random() * 2) + 1
+			console.log(side)
+			
+			if (side == 1){
+				bullets.push({
+					x:ship.x+17,
+					y:ship.y+35,
+					w:5,
+					h:10
+				})
+			}
+
+			if (side == 2){
+				bullets.push({
+					x:ship.x+55,
+					y:ship.y+35,
+					w:5,
+					h:10
+				})
+			}
+
 			fireUP = true
+		
 		}
 
 	
@@ -123,8 +153,8 @@
 			ship.x+=speed;
 		}
 
-		if(ship.x > 550){
-			ship.x = 550;
+		if(ship.x > 520){
+			ship.x = 520;
 		}
 		if(ship.x < 0){
 			ship.x = 0;
@@ -142,12 +172,17 @@
 		bullets.forEach( function(value,i,array){
 			meteors.forEach( function(value,m,array){
 				if(bullets[i].y >= meteors[m].y && bullets[i].y <= meteors[m].y+meteors[m].h && bullets[i].x >= meteors[m].x && bullets[i].x <= meteors[m].x+meteors[m].w){
+					//ctx.drawImage(exp,meteors[m].x, meteors[m].y,meteors[m].w,meteors[m].h);
 					meteors[m].x = Math.floor(Math.random() * 520) + 1;
 					meteors[m].y = -30;
+
+
 					delete bullets[i];
 					pontos+=1
 			}
 			})
+
+
 		})
 
 		if (pontos > 10 && pontos < 11){
@@ -162,11 +197,15 @@
 	function render(){
 		ctx.clearRect(0,0,cnv.width,cnv.height);
 		ctx.drawImage(background,0,0);
+		ctx.font = "20px Arial";
+		ctx.fillText("Pontos: "+pontos, 20, 790);
+		ctx.fillText("Vidas: "+ vidas,450, 790);
 		ctx.fillStyle = "rgb(236, 240, 241)";
-		ctx.fillRect(ship.x, ship.y, ship.w,ship.h);
-
+		//ctx.fillRect(ship.x, ship.y, ship.w,ship.h);
+		ctx.drawImage(nave,ship.x, ship.y,ship.w,ship.h);
 		meteors.forEach( function(value,i,array){
-			ctx.fillRect(meteors[i].x, meteors[i].y, meteors[i].w,meteors[i].h);
+			//ctx.fillRect(meteors[i].x, meteors[i].y, meteors[i].w,meteors[i].h);
+			ctx.drawImage(meteoro,meteors[i].x, meteors[i].y, meteors[i].w,meteors[i].h);
 			meteors[i].y+=2;
 
 			if (meteors[i].y > 800 ){
@@ -178,10 +217,10 @@
 
 
 		bullets.forEach( function(value,i,array){
-			ctx.fillRect(bullets[i].x, bullets[i].y, bullets[i].w,bullets[i].h);
+			ctx.drawImage(tiro,bullets[i].x, bullets[i].y, bullets[i].w,bullets[i].h);
 		})
 
-		console.log(bullets)
+		//console.log(bullets)
 	}
 
 	function clearBullets(){
@@ -203,17 +242,11 @@
 	function update(){ 
 		requestAnimationFrame(update, cnv);
 		move();
-		checkStatus();
 		colision();
+		checkStatus();
 		clearBullets();
 		render();
-		document.getElementById('info').innerHTML = 
-		'pontos ' + pontos +
-		' Vidas ' + vidas +
-		'<br>ship x: ' + ship.x +
-		'<br>ship y: ' + ship.y;
-		}
-
+	}
 	</script>
 </body>
 </html>
