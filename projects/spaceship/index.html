@@ -24,22 +24,58 @@
 			#meteor{
 			font-size:20px;
 		}
+		#restart{
+			position: absolute;
+			width:150px;
+			height: 40px;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			margin:auto;
+			display: none;
+			cursor: pointer;
+			border:none;
+			font-size:20px;
+		}
+
+		#start{
+			position: absolute;
+			width:150px;
+			height: 40px;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			margin:auto;
+			display: block;
+			cursor: pointer;
+			border:none;
+			font-size:20px;
+		}
+
+		button:hover{
+			background-color: #c6c6c6;
+		}
 	</style>
 </head>
 <body>
 <canvas width="600" height="800"></canvas>
-<button onclick="main();">Start Game</button>
+<button id="restart" onclick="restart();">Play Again</button>
+<button id="start" onclick="start();">Start game</button>
 <script>
 	// variables
-	var lifes = 3,
+	var lifes = 5,
 	points = 0,
+	meteorMOVE = false,
 	fireSPEED = 10,
-	speed = 5,
+	speed = 10,
+	gameOver = false,
 	shipLEFT = false, 
-	shipRIGHT = false
-	fireUP = false
-	LEFT = 37, 
-	RIGHT = 39,
+	shipRIGHT = false,
+	fireUP = false,
+	LEFT = 37,
+	RIGHT = 39
 
 	// images
 	background = new Image();
@@ -52,7 +88,7 @@
 	meteorIMG.src = "meteor.png";
 
 	var bulletIMG = new Image();
-	bulletIMG.src = "tiro.png";
+	bulletIMG.src = "bullet.png";
 
 	var cnv = document.querySelector('canvas');
 	var ctx = cnv.getContext('2d');
@@ -70,19 +106,19 @@
 	meteors=[
 	{
 		x:Math.floor(Math.random() * 520) + 1,
-		y:-40,
+		y:-70,
 		w:40,
 		h:60
 	},
 	{
 		x:Math.floor(Math.random() * 520) + 1,
-		y:-40,
+		y:-50,
 		w:40,
 		h:60
 	},
 	{
 		x:Math.floor(Math.random() * 520) + 1,
-		y:-40,
+		y:-90,
 		w:40,
 		h:60
 	}
@@ -128,10 +164,10 @@
 
 	window.addEventListener("keyup", function keyUp(e){
 		var key =	e.keyCode;
-		if (key === LEFT && key !== RIGHT){
+		if (key == LEFT && key !== RIGHT){
 			shipLEFT = false;
 		}
-		if (key === RIGHT && key !== LEFT){
+		if (key == RIGHT && key !== LEFT){
 			shipRIGHT = false;
 		}
 	});
@@ -183,8 +219,13 @@
 	}
 
 	function checkStatus(){
-		if (lifes == 0){
-			window.location.reload();
+		if (meteorMOVE){
+			meteors.forEach(function(value,i,array){
+				meteors[i].y+=3;
+			})
+		}
+		if (lifes <= 0){
+			gameOver = true;
 		}
 	}
 
@@ -205,17 +246,44 @@
 		//meteors
 		meteors.forEach(function(value,i,array){
 			ctx.drawImage(meteorIMG,meteors[i].x, meteors[i].y, meteors[i].w,meteors[i].h);
-			meteors[i].y+=2;
 			if (meteors[i].y > 800 ){
 				meteors[i].x = Math.floor(Math.random() * 520) + 1;
 				meteors[i].y = -30;
-				vidas-=1;
+				lifes-=1;
 			}
 		})
 		// bullets
 		bullets.forEach(function(value,i,array){
 			ctx.drawImage(bulletIMG,bullets[i].x, bullets[i].y, bullets[i].w,bullets[i].h);
 		})
+
+		if(gameOver){
+			bullets = [];
+			ctx.clearRect(0,0,cnv.width,cnv.height);
+			ctx.drawImage(background,0,0);
+			ctx.font = "25px Arial";
+			ctx.fillText("GAME OVER", 225, 320);
+			ctx.font = "15px Arial";
+			ctx.fillText("You made "+ points + " points", 230, 350);
+			document.getElementById('restart').style.display = 'block';
+
+		}
+	}
+
+	function start(){
+		document.getElementById('start').style.display = 'none';
+		meteorMOVE = true;
+	}
+
+	function restart(){
+		document.getElementById('restart').style.display = 'none';
+		meteors.forEach(function(value,i,array){
+				meteors[i].y= -70;
+			})
+		gameOver = false ;
+		lifes = 5;
+		meteorMOVE = true;
+		points = 0;
 	}
 
 	main();
