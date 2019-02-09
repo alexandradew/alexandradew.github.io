@@ -171,8 +171,8 @@
 		ctx.drawImage(background,0,0);
 		//text information
 		ctx.font = "20px Arial";
-		ctx.fillText("Points: "+ points, 20, 790);
-		ctx.fillText("Lifes: "+ lifes,450, 790);
+		ctx.fillText("SCORE: "+ points, 20, 790);
+		ctx.fillText("LIFES: "+ lifes,450, 790);
 		ctx.fillStyle = "rgb(236, 240, 241)";
 		//ship
 		ctx.drawImage(shipIMG,ship.x, ship.y,ship.w,ship.h);
@@ -197,7 +197,7 @@
 			ctx.font = "25px Arial";
 			ctx.fillText("GAME OVER", 225, 320);
 			ctx.font = "15px Arial";
-			ctx.fillText("You made "+ points + " points", 230, 350);
+			ctx.fillText("You score "+ points, 230, 350);
 			document.getElementById('restart').style.display = 'block';
 
 		}
