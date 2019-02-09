@@ -76,7 +76,6 @@
 
 		if (key === 65){
 			side = Math.floor(Math.random() * 2) + 1
-			console.log(side)
 			if (side == 1){
 				bullets.push({
 					x:ship.x+17,
