@@ -197,7 +197,7 @@
 			ctx.font = "25px Arial";
 			ctx.fillText("GAME OVER", 225, 320);
 			ctx.font = "15px Arial";
-			ctx.fillText("You score "+ points, 230, 350);
+			ctx.fillText("Your score "+ points, 230, 350);
 			document.getElementById('restart').style.display = 'block';
 
 		}
