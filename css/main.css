@@ -12,6 +12,7 @@ html, body{
 	background-image: url("../img/bg.jpg");
 	font-family: 'Handlee', cursive;
 	color:#FFF;
+	background-repeat: no-repeat;
 }
 
 .picture{
