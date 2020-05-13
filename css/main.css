@@ -125,14 +125,14 @@ h4 {
 }
 
 .space-ship {
-    background-image: url('/img/spaceship.png');
+    background-image: url('/img/ship.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .immersion {
-    background-image: url('/img/immersionn.png');
+    background-image: url('/img/immersionn.PNG');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
