@@ -118,21 +118,21 @@ h4 {
 }
 
 .color-picker {
-    background-image: url(/img/color-picker.PNG);
+    background-image: url('/img/color-picker.PNG');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .space-ship {
-    background-image: url(/img/spaceship.png);
+    background-image: url('/img/spaceship.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .immersion {
-    background-image: url(/img/immersion.png);
+    background-image: url('/img/immersionn.PNG');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
