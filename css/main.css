@@ -138,6 +138,13 @@ h4 {
     background-position: center;
 }
 
+.musicall {
+    background-image: url('/img/musicall.PNG');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .description {
     max-width: 95%;
     width: 400px;
