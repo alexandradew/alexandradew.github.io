@@ -216,3 +216,9 @@ footer {
     }
 
 }
+
+@media (max-width:500px) {
+    footer p {
+        font-size:1.5rem;
+    }
+}
