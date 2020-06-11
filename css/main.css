@@ -145,6 +145,14 @@ h4 {
     background-position: center;
 }
 
+.minhas-series {
+    background-image: url('/img/minhas-series.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
 .description {
     max-width: 95%;
     width: 400px;
