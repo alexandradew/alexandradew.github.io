@@ -1,0 +1,47 @@
+*{font-family: 'Nunito', sans-serif;}
+
+.index{
+  padding:20px 30px 30px;
+  height: 100vh;
+  overflow-x: hidden; 
+  overflow-y: auto;
+}
+
+.index a {
+  color:#000;
+  text-decoration: none !important;
+}
+
+.index h3:hover i{
+  color:#3498db;
+}
+
+.index ol li a:hover{
+  text-decoration: underline !important;
+  color:#3498db;
+}
+
+.content{
+  padding:20px 50px 20px 50px;
+  height: 100vh;
+  overflow-x: hidden; 
+  overflow-y: auto;
+}
+
+.content h2{
+  padding-top:20px;
+}
+
+.content h4{
+  padding-top:20px;
+}
+
+.class{
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom:100vh;
+}
+
+.class ul li{
+  font-weight: bold;
+}
